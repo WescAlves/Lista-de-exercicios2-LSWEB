@@ -1,55 +1,44 @@
-window.addEventListener("load", function(){
-
-let converterFahrenheit = function(celsius){
-    let tempfahrenheit = celsius * 1.8 + 32;
-    return tempfahrenheit;
-}
-let converterKelvin = function(celsius){
-    let tempkelvin = celsius*1 + 273;
-    return tempkelvin;
-}
-let keyupEvent = function(){
-    document.addEventListener("keyup", function(){
-        let celsius = celsiusInput.value;
-        
-        if(!isNaN(celsius)){
-            if(aux>0){alerta.removeChild(paragrafo3);}    
-            fahrenheit = converterFahrenheit(celsius);
-            kelvin = converterKelvin(celsius);
-            console.log(celsius);   
-            paragrafo1.textContent = `A temperatura em Fahrenheit é ${fahrenheit}`;
-            paragrafo2.textContent = `A temperatura em Kelvin é ${kelvin}`;
-        }
-        else{
-            let fahrenheit = "---";
-            let kelvin = "---"       
-            paragrafo1.textContent = `A temperatura em Fahrenheit é ${fahrenheit}`;
-            paragrafo2.textContent = `A temperatura em Kelvin é ${kelvin}`; 
-            alerta.appendChild(paragrafo3);
-            paragrafo3.textContent = "Digite um valor válido para a conversão!!"
-            aux++;
-        }
+const nameEntry = document.querySelector("#name");
+const salaryEntry = document.querySelector("#salary");
+const addButton = document.querySelector("#AddButton");
+const Lista = document.querySelector("#list");
+const div = document.querySelector("#div");
+let array = [20]
+aux = 0;
+maior = 0;
+let maiorSalario;
+let somaSalario = 0;
+addButton.addEventListener("click", AddEmployee = function(){
+    if(aux<20){
+    console.log("Passou aqui");
+    console.log(aux);
     
-    })  
-
+    if(aux==0){
+        maiorSalario = document.createElement("p");
+        totalSalario = document.createElement("p");   
+    }   
+    let nome = nameEntry.value;
+    let salario = parseInt(salaryEntry.value);
+    let func = {nome, salario}
+    somaSalario = somaSalario + func.salario;
+    array[aux] = func;
+    console.log(array[aux]);
+    if(func.salario>maior){
+            maior = func.salario;            
+            maiorSalario.textContent = `${func.nome} ganha o maior salário: ${maior}`
+    }
+    totalSalario.textContent = `A folha salarial é ${somaSalario}`;
+    div.appendChild(totalSalario);        
+    div.appendChild(maiorSalario);
+    nameEntry.value = '';
+    salaryEntry.value = '';
+    const novoItemLista = document.createElement("li");
+    Lista.appendChild(novoItemLista);
+    novoItemLista.textContent = (`${func.nome}, ${func.salario}`);
+    aux++;
 }
-let aux=0
-let fahrenheit = "---";
-let kelvin = "---"
-let spanFahrenheit = document.querySelector("#temp-Fahrenheit");
-let spanKelvin = document.querySelector("#temp-Kelvin");
-let alerta = document.querySelector("#alerta");
-let paragrafo1 = document.createElement("p");
-let paragrafo2 = document.createElement("p");
-let paragrafo3 = document.createElement("p");
-let celsiusInput = document.querySelector("#celsius-input");
-spanFahrenheit.appendChild(paragrafo1);
-paragrafo1.textContent = `A temperatura em Fahrenheit é ${fahrenheit}`;
-spanKelvin.appendChild(paragrafo2);
-paragrafo2.textContent = `A temperatura em Kelvin é ${kelvin}`;
+    else{
+        alert("Empresa completa!");
+    }
+});
 
-
-keyupEvent();
-
-
-})
