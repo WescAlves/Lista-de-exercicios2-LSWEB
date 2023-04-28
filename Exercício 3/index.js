@@ -58,4 +58,54 @@ const filmes = [{
     "titulo": "How to Train Your Dragon",
     "lancamento": 2010,
 }];
+
+
+const input = document.querySelector("#input");
+const inputFilme = input.value;
+const lista = document.querySelector("#listaFilmes")
+filmes.forEach(filme => {
+    console.log("Passou aqui")
+    let mostrarFilme = document.createElement("li");
+    let titulo = filme.titulo;
+    let lancamento = filme.lancamento;
+    mostrarFilme.textContent = `${titulo} -- ${lancamento}`;
+    lista.appendChild(mostrarFilme);
+});
+input.addEventListener("keyup", function(){
+    const input = document.querySelector("#input");
+    const inputFilme = input.value;
+    while(lista.firstChild){
+        lista.removeChild(lista.firstChild)
+        }
+    if(inputFilme === '' ){
+        filmes.forEach(filme => {
+            console.log("Passou aqui")
+            let mostrarFilme = document.createElement("li");
+            let titulo = filme.titulo;
+            let lancamento = filme.lancamento;
+            mostrarFilme.textContent = `${titulo} -- ${lancamento}`;
+            lista.appendChild(mostrarFilme);
+        })
+    }
+    const filmesFiltrado = filmes.filter(filme => {
+        return filme.titulo.includes(inputFilme)
+    })
+    console.log("Digitado");
+    console.log(inputFilme);
+    if(inputFilme!== ''){
+    filmesFiltrado.forEach(filme => {
+            let mostrarFilme = document.createElement("li");
+            let titulo = filme.titulo;
+            let lancamento = filme.lancamento;
+            console.log(titulo);
+            mostrarFilme.textContent = `${titulo} -- ${lancamento}`;
+            lista.appendChild(mostrarFilme);
+            
+        }) 
+    }  
+    })
+
+
+
     
+
