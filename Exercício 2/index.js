@@ -1,21 +1,24 @@
-const input = document.querySelector("#input");
-const adicionarTarefa = function(){
-    const tarefa = input.value;
-    const lista = document.querySelector("#lista");
-    let novoItemLista = document.createElement("li");
-    lista.appendChild(novoItemLista);
-    novoItemLista.textContent = tarefa;
+const inputTarefa = document.getElementById("inputTarefa");
+const listaTarefas = document.getElementById("listaTarefas");
+
+inputTarefa.addEventListener("keydown", function(event) {
+	if (event.key === "Enter") {
+		adicionarTarefa();
+	}
+});
+
+function adicionarTarefa() {
+	const tarefa = inputTarefa.value;
+	if (tarefa !== "") {
+		const item = document.createElement("li");
+		item.innerHTML = tarefa + "<button>Remover</button>";
+		listaTarefas.appendChild(item);
+		inputTarefa.value = "";
+        let botao = document.querySelector("button");
+		botao.addEventListener("click", removerTarefa);
+	}
 }
-const retirarTarefa = function(){
-    
+
+function removerTarefa() {
+	this.parentNode.remove();
 }
-input.addEventListener("keydown", function(e){
-    if(e.which === 13){
-        console.log("Passou aqui")
-        adicionarTarefa();
-    }
-})
-
-
-
-
